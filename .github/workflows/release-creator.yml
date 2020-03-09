@@ -1,0 +1,21 @@
+name: Release Creator
+
+on:
+  release:
+    types: [published]
+    
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+  DESTINATION_REPO: alice-biometrics/release-creator-example
+  
+jobs:
+  release-publish:
+    name: Release Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alice-biometrics/release-creator@v1.0.3
+        with:
+          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+          version: 'inherit'
+          description: 'inherit'
+          repo: ${{ env.DESTINATION_REPO }}
